@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("connected")
     console.log()
     renderDogs()
+    renderBreeds()
 })
 
 
@@ -18,6 +19,17 @@ let renderDogs = function() {
  })
 }
 
+let renderBreeds = function() { 
+    fetch ('https://dog.ceo/api/breeds/list/all')
+    .then ( response => response.json() )
+    .then ( breedArray =>{  
+        
+        Object.keys(breedArray.message).forEach((breed) =>{ 
+            breedList(breed)
+        })
+    })
+}
+
 function renderDogImage(dog) { 
     let container = document.getElementById("dog-image-container")
     let dogDiv = document.createElement("div")
@@ -27,4 +39,14 @@ function renderDogImage(dog) {
     dogDiv.appendChild(dogImage)
 }
 
+function breedList (breed){ 
+    let list = document.getElementById("dog-breeds")
+    let breedLi = document.createElement("li")
+    list.appendChild(breedLi)
+    breedLi.innerText = breed
 
+}
+
+function breedSearch () { 
+
+}
