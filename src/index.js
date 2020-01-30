@@ -23,11 +23,9 @@ let renderBreeds = function() {
     fetch ('https://dog.ceo/api/breeds/list/all')
     .then ( response => response.json() )
     .then ( breedArray =>{  
-        
-        Object.keys(breedArray.message).forEach((breed) =>{ 
-            breedList(breed)
+        breedList(Object.entries(breedArray.message))
         })
-    })
+    
 }
 
 function renderDogImage(dog) { 
@@ -41,12 +39,21 @@ function renderDogImage(dog) {
 
 function breedList (breed){ 
     let list = document.getElementById("dog-breeds")
-    let breedLi = document.createElement("li")
-    list.appendChild(breedLi)
-    breedLi.innerText = breed
+    breed.forEach(breedList => {
+        let breedLi = document.createElement("li")
+        breedLi.innerText = breedList[0]
+        breedList[1].forEach(subBreed => {
+            let subBreedUl = document.createElement('ul')
+            let subBreedLi = document.createElement('li')
+            subBreedLi.innerText = subBreed
+            subBreedUl.appendChild(subBreedLi)
+            breedLi.appendChild(subBreedUl)
+            
+        })
+        list.appendChild(breedLi)
+    })
 
-}
-
-function breedSearch () { 
-
+    
+   
+    
 }
